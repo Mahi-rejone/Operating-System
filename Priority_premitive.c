@@ -6,8 +6,7 @@ void preemptivePriority(int n, int pid[], int At[], int Bt[], int Pr[]) {
     int completed = 0, current = 0;
     float totalTAT = 0, totalWT = 0, totalCT = 0;
 
-    // To build Gantt chart
-    int ganttPid[1000];   // stores pid or -1 if idle, per time unit
+    int ganttPid[1000];   
     int ganttTime = 0;
 
     for(int i = 0; i < n; i++){
@@ -28,7 +27,7 @@ void preemptivePriority(int n, int pid[], int At[], int Bt[], int Pr[]) {
         }
 
         if(idx == -1){
-            ganttPid[ganttTime++] = -1; // idle
+            ganttPid[ganttTime++] = -1;
             current++;
         }
         else{
@@ -49,7 +48,6 @@ void preemptivePriority(int n, int pid[], int At[], int Bt[], int Pr[]) {
         }
     }
 
-    // Table
     printf("\nProcess\tA.T\tB.T\tPriorrity\tC.T\tW.T\tTAT\n");
     for(int i = 0; i < n; i++){
         printf("P%d\t%d\t%d\t%d\t\t%d\t%d\t%d\n", pid[i],At[i],Bt[i],Pr[i], Ct[i], Wt[i], TAT[i]);
@@ -58,12 +56,11 @@ void preemptivePriority(int n, int pid[], int At[], int Bt[], int Pr[]) {
     printf("\nAverage Waiting Time     = %.2f(ms)", totalWT/n);
     printf("\nAverage Turnaround Time  = %.2f(ms)\n", totalTAT/n);
 
-    // Gantt chart print
     printf("\nGantt Chart:\n| ");
 
     for(int i=0; i<ganttTime; ){
         int j=i;
-        // grouping same process
+
         while(j < ganttTime && ganttPid[j] == ganttPid[i]) j++;
 
         if(ganttPid[i] == -1) printf(" IDLE |");
@@ -71,7 +68,6 @@ void preemptivePriority(int n, int pid[], int At[], int Bt[], int Pr[]) {
 
         i = j;
     }
-    // print timeline
     printf("\n0");
     current = 0;
     for(int i=0; i<ganttTime; ){
