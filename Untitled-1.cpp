@@ -67,7 +67,7 @@ void print(process p[],int n){
 
 int main(){
     int n;
-    cout<<"enter numbe of process: ";
+    cout<<"enter number of process: ";
     cin>>n;
     process p[n];
     for (int i=0; i<n; i++){
